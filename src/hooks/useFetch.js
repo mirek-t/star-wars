@@ -15,20 +15,17 @@ const useFetch = (url, formatData = (data) => data) => {
         const responseData = await fetch(url)
         const data = await responseData.json()
         setResponse(formatData(data));
+    }
 
-        data
+    useEffect(() => {
+        doRequest()
             .catch((error) => {
                 setError(error);
             })
             .finally(() => {
                 setLoading(false);
             })
-    }
-
-    useEffect(() => {
-        doRequest().catch(() => {
-        });
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [url, formatData])
 
     return [response, loading, error]
