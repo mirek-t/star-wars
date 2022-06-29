@@ -1,15 +1,11 @@
 import "./App.css";
 import CharacterList from "./components/CharacterList";
 import { endpoint } from "./components/endpoint";
-import useFetch from "./hooks/useFetch";
 
 const formatData = (response) => response?.characters || [];
 
 function App() {
-  const [characters, loading, error] = useFetch(
-    endpoint + "/characters",
-    formatData
-  );
+  const [charackters, loading, error] = useFetch(endpoint + "/characters");
 
   return (
     <div className="App">
