@@ -36,7 +36,10 @@ const doMagic = (dispatch_) => {
 }
 
 dispatch(doMagic)
-console.log(store);
+
+setTimeout(() => {
+    console.log(store);
+}, 100)
 
 
 // const upper = (text) => {
