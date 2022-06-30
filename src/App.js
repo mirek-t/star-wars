@@ -8,7 +8,7 @@ import SearchCharacters from "./components/SearchCharacters";
 const formatData = (response) => response?.characters || [];
 
 function App() {
-    const [characters, loading, error] = useFetch(endpoint + '/characters', formatData)
+    const [characters, dispatch, loading, error] = useFetch(endpoint + '/characters', formatData)
 
     return (
         <div className="App">
@@ -16,7 +16,7 @@ function App() {
                 <h1>Star Wars Characters</h1>
             </header>
             <div>
-                <SearchCharacters />
+                <SearchCharacters dispatch={dispatch} />
             </div>
             <main>
                 <section>

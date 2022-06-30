@@ -1,20 +1,39 @@
 import React, {useEffect, useState} from 'react';
 import {endpoint} from "../endpoint";
-import useThunkReducer from "../hooks/useThunkReducer";
+import {ERROR, RESPONSE_COMPLETE} from "../actionTypes";
 
-function SearchCharacters() {
+
+
+const SearchCharacters = React.memo(({dispatch}) => {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        fetch(endpoint + '/search/' + query)
-            .then((response) => response.json())
-            .then((response) => {
-                '?'
-            })
-            .catch((error) => {
-                '?'
-            })
-    }, [query]);
+        console.log(query);
+        const controller = new AbortController();
+        const {signal} = controller;
+
+        if (query.length > 3) {
+
+            fetch(endpoint + '/search/' + query, {signal})
+                .then((response) => response.json())
+                .then((response) => {
+                    dispatch({
+                        type: RESPONSE_COMPLETE,
+                        payload: {result: response.characters}
+                    })
+                })
+                .catch((error) => {
+                    dispatch({
+                        type: ERROR,
+                        payload: {error}
+                    })
+                })
+        }
+
+        return () => {
+            controller.abort();
+        }
+    }, [query, dispatch]);
 
 
     return (
@@ -22,9 +41,9 @@ function SearchCharacters() {
             type="search"
             placeholder="Search here"
             value={query}
-            onChange={(event) => console.log(event.target.value)}
+            onChange={(event) => setQuery(event.target.value)}
         />
     );
-}
+})
 
 export default SearchCharacters;

@@ -1,4 +1,4 @@
-import {useEffect, useReducer,} from "react";
+import {useEffect} from "react";
 import {fetchReducer} from "../fetchReducer";
 import {ERROR, FETCHING, RESPONSE_COMPLETE} from "../actionTypes";
 import {endpoint} from "../endpoint";
@@ -40,7 +40,7 @@ const useFetch = (url, formatData = (data) => data) => {
     }, [url])
 
     const {result, loading, error} = state
-    return [result, loading, error]
+    return [result, dispatch, loading, error]
 }
 
 export default useFetch;
