@@ -1,13 +1,13 @@
 import "./App.css";
-import CharacterList from "./components/CharacterList";
-import { endpoint } from "./components/endpoint";
-import Search from "./components/Search";
+import { CharacterList } from "./components/CharacterList";
+import { endpoint } from "./endpoint";
 import useFetch from "./hooks/useFetch";
+import SearchCharacters from "./components/SearchCharacters";
 
 const formatData = (response) => response?.characters || [];
 
 function App() {
-  const [characters, loading, error] = useFetch(
+  const [characters, dispatch, loading, error] = useFetch(
     endpoint + "/characters",
     formatData
   );
@@ -18,12 +18,12 @@ function App() {
         <h1>Star Wars Characters</h1>
       </header>
       <div>
-        <Search />
+        <SearchCharacters dispatch={dispatch} />
       </div>
       <main>
         <section>
           {loading ? (
-            <p>"Loading..."</p>
+            <p>Loading...</p>
           ) : (
             <CharacterList characters={characters} />
           )}

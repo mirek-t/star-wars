@@ -1,4 +1,4 @@
-import { FETCHING, ERROR, RESPONSE_COMPLETE } from "./actionTypes";
+import { ERROR, FETCHING, RESPONSE_COMPLETE } from "./actionTypes";
 
 export const fetchReducer = (state, action) => {
   switch (action.type) {
@@ -16,11 +16,9 @@ export const fetchReducer = (state, action) => {
       };
     case RESPONSE_COMPLETE:
       return {
-        reslut: {
-          result: action.payload.result,
-          loading: false,
-          error: null,
-        },
+        result: action.payload.result,
+        loading: false,
+        error: null,
       };
     default:
       return state;
