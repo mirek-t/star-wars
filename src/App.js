@@ -1,6 +1,7 @@
 import "./App.css";
 import CharacterList from "./components/CharacterList";
 import { endpoint } from "./components/endpoint";
+import Search from "./components/Search";
 import useFetch from "./hooks/useFetch";
 
 const formatData = (response) => response?.characters || [];
@@ -16,6 +17,9 @@ function App() {
       <header>
         <h1>Star Wars Characters</h1>
       </header>
+      <div>
+        <Search />
+      </div>
       <main>
         <section>
           {loading ? (

@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { endpoint } from "./components/endpoint";
 
 function Search() {
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    fetch(endpoint + "/search/" + query)
+      .then((response) => response.json())
+      .then((response) => {
+        "?";
+      })
+      .catch((error) => {
+        "?";
+      });
+  }, [query]);
+
   return (
     <input
       type="search"
